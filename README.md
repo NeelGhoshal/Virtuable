@@ -2,12 +2,15 @@
 **Objective**: We aim to assist visually impaired people to efficiently
 interact and attend virtual meetings.
 
+
 **The problem we are aiming to solve**: solves problems related to
 accessibility and involvement of the visually impaired in online
 meetings, such as inability in visually locating and pressing the
 specific keys to access the desired features like mic button, etc. Our
 project will enable them to quickly access all the desired features on an
 online platform using hand gestures as a tool.
+
+![WhatsApp Image 2023-09-15 at 15 23 10](https://github.com/NeelGhoshal/Virtuable/assets/72409908/bc78ef8d-fe14-4d92-80a9-2e691f3259e3)
 
 **Novelty of our project**: We have implemented new visual and audio
 features for enhancing accessibility on online platforms which previously

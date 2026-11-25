@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Virtuable: meeting controls by hand and voice</title>
+  <meta name="description" content="Hand gestures and speech for meeting controls, with a distinct sound for every action. Built for blind and low-vision people.">
+  <meta name="theme-color" content="#f7c500">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#controls">Skip to controls</a>
+
+  <header class="bar">
+    <p class="name">Virtuable</p>
+    <label class="check"><input type="checkbox" id="sounds" checked> Play sounds</label>
+  </header>
+
+  <main>
+    <section class="stage" aria-labelledby="title">
+      <div class="intro">
+        <h1 id="title">Run your meeting without finding the buttons.</h1>
+        <p>Hold up fingers to mute, unmute or agree. Raise a palm to raise your hand. Say anything else. Every action has its own sound.</p>
+        <div class="actions">
+          <button type="button" class="primary" id="camera">Start camera</button>
+          <button type="button" id="calibrate" disabled>Match my skin tone</button>
+        </div>
+        <p id="status" class="status">Camera is off. Video stays on this device.</p>
+        <label class="check"><input type="checkbox" id="palms" checked> Detect a raised palm</label>
+      </div>
+      <div class="view">
+        <canvas id="canvas" width="640" height="480" role="img" aria-label="Mirrored camera view. The hand box is towards the upper left."></canvas>
+        <p class="hold" aria-hidden="true"><span id="seen">Nothing in the box</span><span class="meter"><span id="meter"></span></span></p>
+      </div>
+    </section>
+
+    <section id="controls" class="path" aria-label="Meeting controls" tabindex="-1">
+      <button type="button" class="slab" id="mic" aria-pressed="false" aria-keyshortcuts="Alt+M">
+        <span class="tile" aria-hidden="true"></span>
+        <span class="what">Microphone</span><span class="state" id="mic-state">Muted</span><kbd>Alt M</kbd>
+      </button>
+      <button type="button" class="slab" id="hand" aria-pressed="false" aria-keyshortcuts="Alt+H">
+        <span class="tile" aria-hidden="true"></span>
+        <span class="what">Hand</span><span class="state" id="hand-state">Lowered</span><kbd>Alt H</kbd>
+      </button>
+      <button type="button" class="slab" id="voice" aria-pressed="false" aria-keyshortcuts="Alt+V">
+        <span class="tile" aria-hidden="true"></span>
+        <span class="what">Speech</span><span class="state" id="voice-state">Not listening</span><kbd>Alt V</kbd>
+      </button>
+    </section>
+    <p class="note">This is a practice room. It is not connected to Zoom, Meet or Teams, so nothing here changes a real call.</p>
+
+    <div class="columns">
+      <section aria-labelledby="gestures-title">
+        <h2 id="gestures-title">Gestures</h2>
+        <p>Hold a gesture in the box for about one second. A short tick tells you your hand is inside.</p>
+        <ul class="gestures" id="gestures"></ul>
+      </section>
+
+      <section aria-labelledby="chat-title">
+        <h2 id="chat-title">Chat</h2>
+        <p>Press Alt V and speak. “Mute”, “unmute”, “raise hand”, “lower hand” and “I agree” work as commands. Anything else becomes a message.</p>
+        <ol class="log" id="log" aria-label="Messages" tabindex="0"></ol>
+        <p class="empty" id="empty">No messages yet.</p>
+        <form id="chat">
+          <label for="text">Message</label>
+          <div class="row"><input id="text" type="text" autocomplete="off" maxlength="500"><button type="submit">Send</button></div>
+        </form>
+      </section>
+    </div>
+
+    <section class="limits" aria-labelledby="limits-title">
+      <h2 id="limits-title">What to know</h2>
+      <ul>
+        <li>Gestures are read by skin colour inside the box. A plain background and even light work best. If your hand is not picked up, use “Match my skin tone”.</li>
+        <li>Keep your face out of the box, or it can be read as a fist.</li>
+        <li>Palm detection can mistake other shapes for a hand. Turn it off above if your hand goes up by itself.</li>
+        <li>Speech uses your browser’s recogniser, which may send audio to the browser’s maker. It is available in Chrome, Edge and Safari.</li>
+        <li>Messages are kept only until you close this page.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer><p>Made by Neel Ghoshal, Swarup Kharul, Saniya Pandita and Ishita Chauhan. <a href="https://github.com/NeelGhoshal/Virtuable">Source on GitHub</a></p></footer>
+
+  <div id="live" class="sr" role="status" aria-live="assertive"></div>
+  <video id="video" muted playsinline hidden></video>
+  <noscript>Virtuable needs JavaScript to read the camera.</noscript>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
